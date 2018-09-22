@@ -1,0 +1,43 @@
+{% extends 'resume/base.html' %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<div class="container">
+    <h1>Hello, {{user.first_name }}</h1>
+    <p>Welcome to our resume builder side. You can build and download resumes just by filling the forms.</p>
+    <a class="btn btn-primary" href="{% url 'resume:profile' %}">Click here to view your details</a>
+    <a class="btn btn-primary" href="{% url 'resume:edit_profile' %}">Click here to edit your details</a>
+
+<!--
+    <p>Name: {{ user.first_name}} {{ user.last_name}}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Phone no: {{ user_profile.phone }}</p>
+    <p>Alternate Phone no: {{ user_profile.alt_phone }}</p>
+
+    <form action="/resume/index" method="post">
+        {% csrf_token %}
+        {{ form.as_url }}
+
+        <input type="submit" value="Update">
+    </form>
+
+    <ul>
+        {% for profile in all_profiles %}
+                <li>Phone No: {{ profile.phone }} -- {{ profile.user }} -- {{ user.username }}</li>
+        {% endfor %}
+
+        {% for exp in all_exp %}
+                <li>Company: {{ exp.company_name }} -- {{ exp.user }} -- {{ user.username }}</li>
+        {% endfor %}
+    </ul>
+-->
+
+</div>
+
+{% else %}
+    <h1>You are not Logged in to view this Page. Please login or Register</h1>
+    <p><a href="{% url 'resume:register' %}">Register</a></p>
+    <p><a href="{% url 'resume:login_user' %}">Login</a></p>
+{% endif %}
+
+{% endblock %}
