@@ -5,6 +5,7 @@
 
 
 <div class="container">
+    <div class="card bg-light text-dark"><div class="card-body">
     <!-- Data from User table -->
     <p>Username: {{ user.username }}</p>
     <p>Full name: {{ user.first_name }} {{ user.last_name }}</p>
@@ -20,6 +21,7 @@
     <p>Current CTC(in LPA): {{ profile.current_ctc }}</p>
     <p>Expected CTC(in LPA): {{ profile.expected_ctc }}</p>
     {% endfor %}
+    </div></div>
 
     <!-- Data from UserJobExperience table -->
     {% for exp in all_exp %}
@@ -30,14 +32,17 @@
         <p>Contribution: {{ exp.contribution }}</p>
     </div></div>
     {% endfor %}
+    <p>&nbsp;<br/></p>
 
-    <a class="btn btn-primary" href="{% url 'resume:edit_profile' %}">Click here to edit your details</a>
+    <p><a class="btn btn-primary" href="{% url 'resume:edit_profile' %}">Click here to edit your details</a></p>
+
+    <p><a class="btn btn-success" href="{% url 'resume:create_resume' %}">Download Resume</a></p>
 
 </div>
 
 {% else %}
     <h1>You are not Logged in to view this Page. Please login or Register</h1>
-    <p><a href="{% url 'resume:register' %}">Register</a></p>
+    <p><a href="{% url 'resume:register' %}">Register</a>
     <p><a href="{% url 'resume:login_user' %}">Login</a></p>
 {% endif %}
 

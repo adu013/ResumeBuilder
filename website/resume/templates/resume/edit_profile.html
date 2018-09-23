@@ -6,17 +6,22 @@
 <div class="container">
     <form method="post">
         {% csrf_token %}
+        <div class="card bg-light text-dark"><div class="card-body">
         {{ form.as_p }}
         {{ form2.as_p }}
         {{ form3.as_p }}
+        </div></div>
         <!-- Job Experience FormSet -->
         {{ formset.management_form }}
 
         {% for f_set in formset.forms %}
+            <div class="card bg-light text-dark"><div class="card-body">
            {{ f_set.as_p }}
+            </div></div>
         {% endfor %}
 
-        <button type="submit">Save</button>
+        <a class="btn btn-primary" href="{% url 'resume:profile' %}">Cancel</a>
+        <button class="btn btn-primary" type="submit">Save</button>
     </form>
 </div>
 

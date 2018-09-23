@@ -1,3 +1,8 @@
+import io
+
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
@@ -202,3 +207,45 @@ def change_password(request):
         form = PasswordChangeForm(user=request.user)
         args = {'form': form}
         return redirect(request, 'resume/profile', args)
+
+
+# Views to export data to pdf
+def create_resume(request):
+    all_profiles = UserProfile.objects.all().filter(user=request.user)
+    all_exp = UserJobExperience.objects.all().filter(user=request.user)
+    context = {'all_profiles': all_profiles, 'all_exp': all_exp}
+
+    pdf_name = "resume/static/resume/files/resume.pdf"
+    c = canvas.Canvas(pdf_name, pagesize=letter)
+    # canvas.setLineWidth(.3)
+    # canvas.setFont('Helvetica', 12)
+
+    c.drawString(20, 750, "Resume")
+    c.drawString(20, 700, "Name: " + request.user.first_name + " " + request.user.last_name)
+    c.drawString(20, 685, "Email: " + request.user.email)
+
+    '''
+    for pro in all_profiles:
+        summary = pro.summary
+        phone = pro.phone
+        alt_phone = pro.alt_phone
+        alt_email = pro.alt_email
+        experience = pro.experience
+        current_ctc = pro.current_ctc
+        expected_ctc = pro.expected_ctc
+
+        c.drawString(20, 670, summary)
+        c.drawString(20, 655, phone)
+        c.drawString(20, 640, alt_phone)
+        c.drawString(20, 625, alt_email)
+        c.drawString(20, 610, experience)
+        c.drawString(20, 595, current_ctc)
+        c.drawString(20, 580, expected_ctc)
+    '''
+    c.save()
+
+    return render(request, 'resume/download.html', {'context': context})
+
+
+def view_resume(request):
+    return render(request, 'files/resume.pdf')

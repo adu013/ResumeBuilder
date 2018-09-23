@@ -31,7 +31,7 @@
         <!-- Items -->
         <div class="collapse navbar-collapse" id="topNavBar">
             <ul class="nav navbar-nav">
-                <li class="{% block albums_active %}{% endblock %}"><a href="{% url 'resume:index' %}"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp; Download Resume</a></li>
+                <li class=""><a href="{% url 'resume:index' %}"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp; Download Resume</a></li>
             </ul>
             <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'resume:index' %}">
                 <div class="form-group">
@@ -39,7 +39,7 @@
                 </div>
                 <button type="submit" class="btn btn-default">Search</button>
             </form>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-form navbar-right">
                 <li>
 
                 </li>
